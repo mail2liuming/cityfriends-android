@@ -66,6 +66,7 @@ public class FeedFragment extends BaseFragment {
 
     @Override
     protected Subscription doLoadData() {
+        LogUtil.d(this.getClass().getSimpleName() + " : doLoadData");
         return RestModule.getApis().getEntries(mCurPage).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<List<FeedEntry>>() {
             @Override
             public void call(List<FeedEntry> feedEntries) {
@@ -93,7 +94,7 @@ public class FeedFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_feed_list, container, false);
         ButterKnife.bind(this, view);
         mListView.setAdapter(mAdapter);
-        mAdapter.setFootViewStatus(RecyclerAdapterWithFooter.FOOT_STATUS_NO_MORE);
+        mAdapter.setFootViewStatus(RecyclerAdapterWithFooter.FOOT_STATUS_NONE);
 
         mRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -117,6 +118,7 @@ public class FeedFragment extends BaseFragment {
 
         @Override
         protected FeedAdapter.ViewHolder onCreateHolder(ViewGroup parent) {
+            LogUtil.d(this.getClass().getSimpleName() + " : onCreateHolder ");
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false);
             return new ViewHolder(view);
         }
@@ -126,6 +128,7 @@ public class FeedFragment extends BaseFragment {
             if (position >= 0 && position < mFeedEntries.size()) {
                 FeedEntry entry = mFeedEntries.get(position);
                 holder.mTypeView.setText(entry.getFeed_type() + "");
+                LogUtil.d(this.getClass().getSimpleName() + " : onBindHolder "+entry.getFeed_type());
                 if (!TextUtils.isEmpty(entry.getUser_name())) {
                     holder.mUserNameView.setText(entry.getUser_name());
                 }
@@ -134,6 +137,7 @@ public class FeedFragment extends BaseFragment {
 
         @Override
         protected int getDataCount() {
+            LogUtil.d(this.getClass().getSimpleName() + " : getDataCount "+mFeedEntries.size());
             return mFeedEntries.size();
         }
 

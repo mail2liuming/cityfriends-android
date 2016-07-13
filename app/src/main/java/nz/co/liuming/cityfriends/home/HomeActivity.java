@@ -65,8 +65,8 @@ public class HomeActivity extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
                 HomeActivity.this);
         adapter.addFragment(FeedFragment.newInstance());
-        adapter.addFragment(CalendarFragment.newInstance());
-        adapter.addFragment(MessageFragment.newInstance());
+//        adapter.addFragment(CalendarFragment.newInstance());
+//        adapter.addFragment(MessageFragment.newInstance());
         viewPager.setAdapter(adapter);
 
         // Give the TabLayout the ViewPager

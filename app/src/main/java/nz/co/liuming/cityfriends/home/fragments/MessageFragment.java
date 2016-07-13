@@ -46,23 +46,23 @@ public class MessageFragment extends BaseFragment {
     SwipeRefreshLayout mRefreshView;
 
 
-    public static FeedFragment newInstance() {
+    public static MessageFragment newInstance() {
         Bundle args = new Bundle();
 
-        FeedFragment fragment = new FeedFragment();
+        MessageFragment fragment = new MessageFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     public String getTabTitle() {
-        return "Feed";
+        return "Message";
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadData();
+//        loadData();
         showLoadingView();
     }
 

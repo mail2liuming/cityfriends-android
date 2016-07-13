@@ -9,11 +9,9 @@ import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import okhttp3.Cache;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -63,13 +61,14 @@ public class RestModule {
     private static OkHttpClient okHttpClient() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 .retryOnConnectionFailure(false)
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(60 * 1000, TimeUnit.MILLISECONDS)
                 .cache(providesCache())
                 .addInterceptor(logging)
+                .addNetworkInterceptor(logging)
                 .addInterceptor(requestInterceptor())
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
@@ -86,16 +85,14 @@ public class RestModule {
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
 
-                HttpUrl url = original.url()
-                        .newBuilder()
-                        .addQueryParameter("user_id", String.valueOf(CityFreindsApplication.get().getUserDelegate().getId()))
-                        .addQueryParameter("token", CityFreindsApplication.get().getUserDelegate().getToken())
-                        .build();
+                StringBuilder tokenBuilder = new StringBuilder("Bearer");
+                tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getId());
+                tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getToken());
 
                 Request request = original.newBuilder()
                         .header("Content-Type", "application/json")
                         .header("Accept", "application/json")
-                        .url(url)
+                        .header("Authorization", tokenBuilder.toString())
                         .method(original.method(), original.body())
                         .build();
 

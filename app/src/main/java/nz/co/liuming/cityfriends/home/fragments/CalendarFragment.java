@@ -42,10 +42,10 @@ public class CalendarFragment extends BaseFragment {
     SwipeRefreshLayout mRefreshView;
 
 
-    public static FeedFragment newInstance() {
+    public static CalendarFragment newInstance() {
         Bundle args = new Bundle();
 
-        FeedFragment fragment = new FeedFragment();
+        CalendarFragment fragment = new CalendarFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +58,7 @@ public class CalendarFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadData();
+//        loadData();
         showLoadingView();
     }
 

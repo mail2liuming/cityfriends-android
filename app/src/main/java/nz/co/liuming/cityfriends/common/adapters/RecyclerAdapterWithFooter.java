@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.utils.LogUtil;
 
 /**
  * Created by liuming on 1/07/16.
@@ -27,6 +28,7 @@ public abstract class RecyclerAdapterWithFooter<VH extends RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ITEM_TYPE_NORMAL:
+                LogUtil.d(this.getClass().getSimpleName() + " : onCreateViewHolder ");
                 return onCreateHolder(parent);
             case ITEM_TYPE_FOOTER:
                 View view = LayoutInflater.from(CityFreindsApplication.get()).inflate(R.layout.list_footer, parent, false);
@@ -38,8 +40,9 @@ public abstract class RecyclerAdapterWithFooter<VH extends RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position > 0 && position < getDataCount()) {
+        if (position >= 0 && position < getDataCount()) {
             onBindHolder((VH) holder, position);
+            LogUtil.d(this.getClass().getSimpleName() + " : onBindViewHolder ");
         } else {
             RecyclerViewHolder footerHolder = (RecyclerViewHolder) holder;
             footerHolder.mTextView.setText(getFootText());
@@ -48,12 +51,15 @@ public abstract class RecyclerAdapterWithFooter<VH extends RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return getDataCount() + ((mFootViewStatus == FOOT_STATUS_NONE) ? 0 : 1);
+        int count =  getDataCount() + ((mFootViewStatus == FOOT_STATUS_NONE) ? 0 : 1);
+        LogUtil.d(this.getClass().getSimpleName() + " : getItemCount "+count);
+        return count;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position > 0 && position < getDataCount()) {
+        LogUtil.d(this.getClass().getSimpleName() + " : getItemViewType "+position);
+        if (position >= 0 && position < getDataCount()) {
             return ITEM_TYPE_NORMAL;
         }
 
