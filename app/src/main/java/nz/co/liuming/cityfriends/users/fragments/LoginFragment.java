@@ -23,6 +23,7 @@ import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.users.events.LoginEvent;
+import rx.Subscription;
 
 /**
  * Created by liuming on 22/06/16.
@@ -71,6 +72,7 @@ public class LoginFragment extends BaseFragment {
 
         return view;
     }
+
 
     @Override
     public void onResume() {

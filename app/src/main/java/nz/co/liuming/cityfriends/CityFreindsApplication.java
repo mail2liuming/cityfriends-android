@@ -22,7 +22,10 @@ public class CityFreindsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        Stetho.initializeWithDefaults(this);
+//        Stetho.initializeWithDefaults(this);
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                .build());
         mUserDelegate = new UserDelegate();
     }
 

@@ -6,7 +6,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import nz.co.liuming.cityfriends.common.rest.model.BaseModel;
+import nz.co.liuming.cityfriends.common.rest.model.ResultResponse;
 import nz.co.liuming.cityfriends.home.model.CalendarFeed;
+import nz.co.liuming.cityfriends.home.model.Feed;
 import nz.co.liuming.cityfriends.home.model.FeedEntry;
 import nz.co.liuming.cityfriends.home.model.MessageFeed;
 import nz.co.liuming.cityfriends.users.model.User;
@@ -29,10 +32,13 @@ public interface RestApis {
     Observable<List<CalendarFeed>> getCalendarFeeds(
             @Query("page") int aPage);
 
-    @GET("calendars")
+    @GET("messages")
     Observable<List<MessageFeed>> getMessageFeeds(
             @Query("page") int aPage);
 
     @POST("login")
     Observable<User> doLogin(@Body JsonObject body);
+
+    @POST("feeds")
+    Observable<ResultResponse> createFeed(@Body Feed body);
 }

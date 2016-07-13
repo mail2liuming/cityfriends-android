@@ -61,7 +61,7 @@ public class RestModule {
     private static OkHttpClient okHttpClient() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return new OkHttpClient.Builder()
                 .retryOnConnectionFailure(false)
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -85,15 +85,20 @@ public class RestModule {
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
 
-                StringBuilder tokenBuilder = new StringBuilder("Bearer");
-                tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getId());
-                tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getToken());
 
-                Request request = original.newBuilder()
+                Request.Builder requestBuilder = original.newBuilder()
                         .header("Content-Type", "application/json")
-                        .header("Accept", "application/json")
-                        .header("Authorization", tokenBuilder.toString())
-                        .method(original.method(), original.body())
+                        .header("Accept", "application/json");
+
+                if (CityFreindsApplication.get().getUserDelegate().isLogin()) {
+                    StringBuilder tokenBuilder = new StringBuilder("Bearer");
+                    tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getId());
+                    tokenBuilder.append(" ").append(CityFreindsApplication.get().getUserDelegate().getToken());
+                    requestBuilder.header("Authorization", tokenBuilder.toString());
+                }
+
+
+                Request request = requestBuilder.method(original.method(), original.body())
                         .build();
 
                 return chain.proceed(request);

@@ -4,33 +4,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
 import nz.co.liuming.cityfriends.home.fragments.CalendarFragment;
+import nz.co.liuming.cityfriends.home.fragments.CreateFeedFragment;
 import nz.co.liuming.cityfriends.home.fragments.FeedFragment;
 import nz.co.liuming.cityfriends.home.fragments.MessageFragment;
 import nz.co.liuming.cityfriends.users.LoginActivity;
 
-public class HomeActivity extends AppCompatActivity
+public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -44,8 +44,7 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intent);
+                addFragment(CreateFeedFragment.newInstance());
             }
         });
 
@@ -65,8 +64,8 @@ public class HomeActivity extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
                 HomeActivity.this);
         adapter.addFragment(FeedFragment.newInstance());
-//        adapter.addFragment(CalendarFragment.newInstance());
-//        adapter.addFragment(MessageFragment.newInstance());
+        adapter.addFragment(CalendarFragment.newInstance());
+        adapter.addFragment(MessageFragment.newInstance());
         viewPager.setAdapter(adapter);
 
         // Give the TabLayout the ViewPager
@@ -77,6 +76,14 @@ public class HomeActivity extends AppCompatActivity
     private void updateNavigationView() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 //
 //        navigationView.getMenu().findItem(R.id.nav_camera).setEnabled(false);
 //        navigationView.getMenu().findItem(R.id.nav_gallery).setVisible(false);
@@ -99,7 +106,8 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_freind) {
 
         } else if (id == R.id.nav_message) {
@@ -140,7 +148,7 @@ public class HomeActivity extends AppCompatActivity
         @Override
         public CharSequence getPageTitle(int position) {
             if (position >= 0 && position < mFragments.size()) {
-                return mFragments.get(position).getTabTitle();
+                return mFragments.get(position).getFragmentTitle();
             }
             return "";
         }

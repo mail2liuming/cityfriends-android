@@ -16,4 +16,11 @@ public class BaseActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
+
+    protected void addFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.container, fragment);
+        fragmentTransaction.addToBackStack(fragment.getTag());
+        fragmentTransaction.commit();
+    }
 }

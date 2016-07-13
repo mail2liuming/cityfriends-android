@@ -17,7 +17,7 @@ import rx.Subscription;
 /**
  * Created by liuming on 15/06/16.
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @BindView(R.id.progress)
@@ -31,9 +31,7 @@ public class BaseFragment extends Fragment {
         return new TextView(getContext());
     }
 
-    public String getTabTitle() {
-        return "Base";
-    }
+    public  String getFragmentTitle(){return "";}
 
     public void navigateToFragment(Fragment fragment) {
         navigateToFragment(fragment, false, false);
@@ -56,13 +54,11 @@ public class BaseFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    protected Subscription doLoadData() {
-        return null;
-    }
+    protected  Subscription doRequest() {return null;}
 
-    public void loadData() {
+    public void request() {
         unSubscribe();
-        mSubscription = doLoadData();
+        mSubscription = doRequest();
     }
 
     private void unSubscribe() {
