@@ -26,7 +26,7 @@ public class MessageFragment extends BaseFeedFragment<MessageFeed> {
 
     @Override
     public String getFragmentTitle() {
-        return "Feed";
+        return "Message";
     }
 
     @Override

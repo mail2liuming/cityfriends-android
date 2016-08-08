@@ -5,6 +5,7 @@ import android.os.PersistableBundle;
 
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
+import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
 import nz.co.liuming.cityfriends.users.fragments.LoginFragment;
 
 /**
@@ -16,6 +17,6 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        showFragment(LoginFragment.newInstance());
+        FragmentManagerUtils.addFragment(this,LoginFragment.newInstance(),"LoginFragment",FragmentManagerUtils.Animation.NONE);
     }
 }

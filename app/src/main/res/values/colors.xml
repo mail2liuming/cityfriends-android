@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="checkbox_green">#8bc34a</color>
+    <color name="checkbox_red">#f44336</color>
+    <color name="checkbox_purple">#9c64cb</color>
+    <color name="checkbox_blue">#64b4cb</color>
+
+    <color name="white">#FFf9f9f9</color>
+    <color name="grey_light">#FFDCDCDC</color>
+    <color name="grey_med">#FFC0C0C0</color>
+    <color name="red">@color/checkbox_red</color>
+    <color name="green">@color/checkbox_green</color>
+    <color name="orange">@color/colorAccent</color>
+
+    <color name="text_black">#000000</color>
+    <color name="text_white">#ffffff</color>
+    <color name="text_dark_grey">#555555</color>
+    <color name="text_med_grey">#6f7179</color>
+    <color name="text_light_grey">#aaaaaa</color>
 </resources>

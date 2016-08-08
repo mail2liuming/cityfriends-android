@@ -31,9 +31,19 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
             FeedEntry entry = mFeedEntries.get(position);
             holder.mTypeView.setText(entry.getFeed_type() + "");
             LogUtil.d(this.getClass().getSimpleName() + " : onBindHolder " + entry.getFeed_type());
-            if (!TextUtils.isEmpty(entry.getUser_name())) {
-                holder.mUserNameView.setText(entry.getUser_name());
-            }
+            attachText(holder.mUserNameView,entry.getUser_name());
+            attachText(holder.mStartPlaceView,entry.getStart_place());
+            attachText(holder.mStartTimeView,entry.getStart_time());
+            attachText(holder.mEndPlaceView,entry.getEnd_place());
+            attachText(holder.mEndTimeView,entry.getEnd_time());
+        }
+    }
+
+    private void attachText(TextView tv, String content) {
+        if (!TextUtils.isEmpty(content)) {
+            tv.setText(content);
+        } else {
+            tv.setText("");
         }
     }
 
@@ -43,6 +53,14 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
         TextView mTypeView;
         @BindView(R.id.item_feed_user_name)
         TextView mUserNameView;
+        @BindView(R.id.item_feed_start_place)
+        TextView mStartPlaceView;
+        @BindView(R.id.item_feed_start_time)
+        TextView mStartTimeView;
+        @BindView(R.id.item_feed_end_place)
+        TextView mEndPlaceView;
+        @BindView(R.id.item_feed_end_time)
+        TextView mEndTimeView;
 
         public ViewHolder(View itemView) {
             super(itemView);

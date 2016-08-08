@@ -24,6 +24,7 @@ import java.util.List;
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
+import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
 import nz.co.liuming.cityfriends.home.fragments.CalendarFragment;
 import nz.co.liuming.cityfriends.home.fragments.CreateFeedFragment;
 import nz.co.liuming.cityfriends.home.fragments.FeedFragment;
@@ -44,7 +45,7 @@ public class HomeActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFragment(CreateFeedFragment.newInstance());
+                FragmentManagerUtils.addFragmentAndAddToBackStack(HomeActivity.this,CreateFeedFragment.newInstance(),CreateFeedFragment.TAG,FragmentManagerUtils.Animation.SLIDE_IN_BOTTOM);
             }
         });
 
