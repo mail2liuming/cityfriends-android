@@ -32,7 +32,7 @@ public interface RestApis {
     Observable<List<CalendarFeed>> getCalendarFeeds(
             @Query("page") int aPage);
 
-    @GET("messages")
+    @GET("in_site_messages")
     Observable<List<MessageFeed>> getMessageFeeds(
             @Query("page") int aPage);
 
@@ -41,4 +41,10 @@ public interface RestApis {
 
     @POST("feeds")
     Observable<ResultResponse> createFeed(@Body Feed body);
+
+    @POST("calendars")
+    Observable<ResultResponse> createCalendar(@Body CalendarFeed body);
+
+    @POST("in_site_messages")
+    Observable<ResultResponse> createCalendar(@Body MessageFeed body);
 }

@@ -36,4 +36,12 @@
         <item name="android:textSize">@dimen/text_small</item>
     </style>
 
+    <style name="CardViewCommon" parent="CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">1dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
 </resources>

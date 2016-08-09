@@ -10,8 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
+
 import butterknife.BindView;
 import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.utils.DateUtils;
 import rx.Subscription;
 
 /**
@@ -83,5 +88,37 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         unSubscribe();
+    }
+
+    /**
+     *
+     * @param calendar
+     * @param dateSetListener
+     * @return
+     */
+    protected DatePickerDialog configureDatePicker(Calendar calendar, DatePickerDialog.OnDateSetListener dateSetListener) {
+        //  Date picker dialog null handling.
+        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+
+
+        return datePickerDialog;
+    }
+
+    /**
+     * Update the text view with the selected date
+     *
+     * @param selectedYear  Year
+     * @param selectedMonth Month
+     * @param selectedDay   Day
+     */
+    protected void updateTextView(TextView tv, int selectedYear, int selectedMonth, int selectedDay) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(selectedYear, selectedMonth, selectedDay);
+        tv.setText(DateUtils.getFormattedDate(calendar.getTime(), DateUtils.DATE_FORMAT_DATE));
+//        updateTextView(calendar.getTime());
     }
 }

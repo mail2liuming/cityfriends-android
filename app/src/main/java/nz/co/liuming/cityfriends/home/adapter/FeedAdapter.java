@@ -5,11 +5,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.utils.DateUtils;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.model.FeedEntry;
 
@@ -29,13 +31,29 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
     protected void onBindHolder(FeedAdapter.ViewHolder holder, int position) {
         if (position >= 0 && position < mFeedEntries.size()) {
             FeedEntry entry = mFeedEntries.get(position);
-            holder.mTypeView.setText(entry.getFeed_type() + "");
-            LogUtil.d(this.getClass().getSimpleName() + " : onBindHolder " + entry.getFeed_type());
+            if(entry.getFeed_type() == FeedEntry.TYPE_PROVIDER){
+                holder.mTypeView.setText("Provider");
+                holder.mAddToCalendarView.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.mTypeView.setText("Consumer");
+                holder.mAddToCalendarView.setVisibility(View.GONE);
+            }
+
+
             attachText(holder.mUserNameView,entry.getUser_name());
             attachText(holder.mStartPlaceView,entry.getStart_place());
-            attachText(holder.mStartTimeView,entry.getStart_time());
+            attachDateText(holder.mStartTimeView, entry.getStart_time());
             attachText(holder.mEndPlaceView,entry.getEnd_place());
-            attachText(holder.mEndTimeView,entry.getEnd_time());
+            attachDateText(holder.mEndTimeView,entry.getEnd_time());
+        }
+    }
+
+    private void attachDateText(TextView tv, String content) {
+        if (!TextUtils.isEmpty(content)) {
+            tv.setText(DateUtils.getFormattedDate(DateUtils.getDateFromString(content,DateUtils.DATE_FORMAT_DEFAULT),DateUtils.DATE_FORMAT_DATE));
+        } else {
+            tv.setText("");
         }
     }
 
@@ -61,6 +79,8 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
         TextView mEndPlaceView;
         @BindView(R.id.item_feed_end_time)
         TextView mEndTimeView;
+        @BindView(R.id.item_feed_add_to_calendar)
+        ImageView mAddToCalendarView;
 
         public ViewHolder(View itemView) {
             super(itemView);

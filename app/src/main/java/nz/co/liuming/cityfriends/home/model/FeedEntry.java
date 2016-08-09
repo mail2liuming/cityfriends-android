@@ -22,6 +22,9 @@ public class FeedEntry implements Parcelable , BaseModel {
      * user_name : Example User3
      */
 
+    public static  final int TYPE_PROVIDER = 1;
+    public static  final int TYPE_CONSUMER = 2;
+
     private int id;
     private int feed_type;
     private String start_time;

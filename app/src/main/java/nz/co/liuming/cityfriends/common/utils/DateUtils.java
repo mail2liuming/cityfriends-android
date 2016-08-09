@@ -12,7 +12,7 @@ import java.util.TimeZone;
  */
 public class DateUtils {
 
-    public static final String DATE_FORMAT_SITE_REVIEW = "dd/MM/yyyy";
+    public static final String DATE_FORMAT_DATE = "dd/MM/yyyy";
     public static final String DATE_FORMAT_DEFAULT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     public static final String DATE_FORMAT_MY_REPORT = "dd/MM/yy - hh:mm a";
 

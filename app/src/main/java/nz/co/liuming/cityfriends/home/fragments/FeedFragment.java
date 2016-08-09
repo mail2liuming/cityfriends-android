@@ -1,8 +1,16 @@
 package nz.co.liuming.cityfriends.home.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
 import nz.co.liuming.cityfriends.common.rest.RestModule;
+import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.adapter.BaseFeedAdapter;
 import nz.co.liuming.cityfriends.home.adapter.FeedAdapter;
@@ -16,12 +24,45 @@ import rx.schedulers.Schedulers;
  */
 public class FeedFragment extends BaseFeedFragment<FeedEntry> {
 
+    private FloatingActionButton fab;
+
     public static FeedFragment newInstance() {
         Bundle args = new Bundle();
 
         FeedFragment fragment = new FeedFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManagerUtils.addFragmentAndAddToBackStack((BaseActivity) getActivity(), CreateFeedFragment.newInstance(), CreateFeedFragment.TAG, FragmentManagerUtils.Animation.SLIDE_IN_BOTTOM);
+            }
+        });
+
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (null != fab) {
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (null != fab) {
+            fab.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type:" />
+
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_provider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provider"
+                    android:layout_margin="@dimen/margin_normal" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_consumer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Consumer"
+                    android:layout_margin="@dimen/margin_normal" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTheme.Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exact Time:" />
+
+            <TextView
+                android:id="@+id/feed_exact_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/calendar_button" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/feed_button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_double"
+            android:text="Submit" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
