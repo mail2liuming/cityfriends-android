@@ -31,21 +31,10 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
     protected void onBindHolder(FeedAdapter.ViewHolder holder, int position) {
         if (position >= 0 && position < mFeedEntries.size()) {
             FeedEntry entry = mFeedEntries.get(position);
-            if(entry.getFeed_type() == FeedEntry.TYPE_PROVIDER){
-                holder.mTypeView.setText("Provider");
-                holder.mAddToCalendarView.setVisibility(View.VISIBLE);
-            }
-            else {
-                holder.mTypeView.setText("Consumer");
-                holder.mAddToCalendarView.setVisibility(View.GONE);
-            }
-
-
+            attachText(holder.mContentView,entry.getFeed_content());
             attachText(holder.mUserNameView,entry.getUser_name());
             attachText(holder.mStartPlaceView,entry.getStart_place());
             attachDateText(holder.mStartTimeView, entry.getStart_time());
-            attachText(holder.mEndPlaceView,entry.getEnd_place());
-            attachDateText(holder.mEndTimeView,entry.getEnd_time());
         }
     }
 
@@ -67,18 +56,14 @@ public class FeedAdapter extends BaseFeedAdapter<FeedEntry, FeedAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View view;
-        @BindView(R.id.item_feed_type)
-        TextView mTypeView;
+        @BindView(R.id.item_feed_content)
+        TextView mContentView;
         @BindView(R.id.item_feed_user_name)
         TextView mUserNameView;
         @BindView(R.id.item_feed_start_place)
         TextView mStartPlaceView;
         @BindView(R.id.item_feed_start_time)
         TextView mStartTimeView;
-        @BindView(R.id.item_feed_end_place)
-        TextView mEndPlaceView;
-        @BindView(R.id.item_feed_end_time)
-        TextView mEndTimeView;
         @BindView(R.id.item_feed_add_to_calendar)
         ImageView mAddToCalendarView;
 

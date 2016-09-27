@@ -31,11 +31,6 @@ import rx.schedulers.Schedulers;
  */
 public class CreateCalendarFragment extends BaseFragment implements View.OnClickListener {
 
-    @BindView(R.id.radio_button_provider)
-    RadioButton mRadioButtonForProvider;
-    @BindView(R.id.radio_button_consumer)
-    RadioButton mRadioButtonForConsumer;
-
     @BindView(R.id.feed_exact_time)
     TextView mExactTimeView;
 

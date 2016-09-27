@@ -20,48 +20,11 @@
                 style="@style/AppTheme.Widget.TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Type:" />
-
-
-            <RadioGroup
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_button_provider"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Provider"
-                    android:layout_margin="@dimen/margin_normal" />
-
-                <RadioButton
-                    android:id="@+id/radio_button_consumer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Consumer"
-                    android:layout_margin="@dimen/margin_normal" />
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/AppTheme.Widget.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Available Weight:" />
+                android:text="Content" />
 
 
             <EditText
-                android:id="@+id/feed_available"
+                android:id="@+id/feed_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -108,44 +71,7 @@
                 android:drawableRight="@drawable/calendar_button" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
-            android:orientation="horizontal">
 
-            <TextView
-                style="@style/AppTheme.Widget.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="End Place:" />
-
-            <EditText
-                android:id="@+id/feed_end_place"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/AppTheme.Widget.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="End Time:" />
-
-            <TextView
-                android:id="@+id/feed_end_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/calendar_button" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/feed_button_submit"

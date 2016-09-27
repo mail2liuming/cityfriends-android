@@ -15,25 +15,23 @@ public class FeedEntry implements Parcelable , BaseModel {
      * feed_type : 1
      * start_time : 2016-06-10T00:00:00.000Z
      * start_place : hongkong
-     * end_place : auckland
-     * end_time : 2016-06-29T00:00:00.000Z
-     * available : 5
+     * content : 5
      * user_id : 3
      * user_name : Example User3
      */
-
-    public static  final int TYPE_PROVIDER = 1;
-    public static  final int TYPE_CONSUMER = 2;
 
     private int id;
     private int feed_type;
     private String start_time;
     private String start_place;
-    private String end_place;
-    private String end_time;
-    private String available;
+    private String content;
     private int user_id;
     private String user_name;
+    /**
+     * feed_content : 5kg available
+     */
+
+    private String feed_content;
 
     public int getId() {
         return id;
@@ -67,29 +65,6 @@ public class FeedEntry implements Parcelable , BaseModel {
         this.start_place = start_place;
     }
 
-    public String getEnd_place() {
-        return end_place;
-    }
-
-    public void setEnd_place(String end_place) {
-        this.end_place = end_place;
-    }
-
-    public String getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(String end_time) {
-        this.end_time = end_time;
-    }
-
-    public String getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(String available) {
-        this.available = available;
-    }
 
     public int getUser_id() {
         return user_id;
@@ -107,6 +82,16 @@ public class FeedEntry implements Parcelable , BaseModel {
         this.user_name = user_name;
     }
 
+
+
+    public String getFeed_content() {
+        return feed_content;
+    }
+
+    public void setFeed_content(String feed_content) {
+        this.feed_content = feed_content;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -118,11 +103,10 @@ public class FeedEntry implements Parcelable , BaseModel {
         dest.writeInt(this.feed_type);
         dest.writeString(this.start_time);
         dest.writeString(this.start_place);
-        dest.writeString(this.end_place);
-        dest.writeString(this.end_time);
-        dest.writeString(this.available);
+        dest.writeString(this.content);
         dest.writeInt(this.user_id);
         dest.writeString(this.user_name);
+        dest.writeString(this.feed_content);
     }
 
     public FeedEntry() {
@@ -133,14 +117,13 @@ public class FeedEntry implements Parcelable , BaseModel {
         this.feed_type = in.readInt();
         this.start_time = in.readString();
         this.start_place = in.readString();
-        this.end_place = in.readString();
-        this.end_time = in.readString();
-        this.available = in.readString();
+        this.content = in.readString();
         this.user_id = in.readInt();
         this.user_name = in.readString();
+        this.feed_content = in.readString();
     }
 
-    public static final Parcelable.Creator<FeedEntry> CREATOR = new Parcelable.Creator<FeedEntry>() {
+    public static final Creator<FeedEntry> CREATOR = new Creator<FeedEntry>() {
         @Override
         public FeedEntry createFromParcel(Parcel source) {
             return new FeedEntry(source);

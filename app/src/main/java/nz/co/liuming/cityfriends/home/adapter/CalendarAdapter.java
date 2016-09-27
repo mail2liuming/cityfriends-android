@@ -22,7 +22,7 @@ public class CalendarAdapter extends BaseFeedAdapter<CalendarFeed, CalendarAdapt
     @Override
     protected CalendarAdapter.ViewHolder onCreateHolder(ViewGroup parent) {
         LogUtil.d(this.getClass().getSimpleName() + " : onCreateHolder ");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_calendar, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,6 +44,8 @@ public class CalendarAdapter extends BaseFeedAdapter<CalendarFeed, CalendarAdapt
         TextView mTypeView;
         @BindView(R.id.item_feed_user_name)
         TextView mUserNameView;
+        @BindView(R.id.item_feed_exact_time)
+        TextView mExactTimeView;
 
         public ViewHolder(View itemView) {
             super(itemView);

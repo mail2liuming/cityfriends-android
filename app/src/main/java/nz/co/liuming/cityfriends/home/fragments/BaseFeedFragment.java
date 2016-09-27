@@ -45,10 +45,14 @@ public abstract class BaseFeedFragment<FT> extends BaseFragment {
     protected Action1<List<FT>> onSuccessListner = new Action1<List<FT>>() {
         @Override
         public void call(List<FT> feedEntries) {
+            if(mRefreshView.isRefreshing()){
+                mAdapter.clearData();
+                mRefreshView.setRefreshing(false);
+            }
             mAdapter.appendData(feedEntries);
             mAdapter.notifyDataSetChanged();
             hideLoadingView();
-            mRefreshView.setRefreshing(false);
+
             if (feedEntries.size() > 0) {
                 mCurPage++;
             }
@@ -77,7 +81,7 @@ public abstract class BaseFeedFragment<FT> extends BaseFragment {
             @Override
             public void onRefresh() {
                 mCurPage = 1;
-                mAdapter.clearData();
+//                mAdapter.clearData();
                 request();
             }
         });

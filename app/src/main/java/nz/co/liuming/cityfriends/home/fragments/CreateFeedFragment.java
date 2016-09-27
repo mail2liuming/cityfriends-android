@@ -38,21 +38,15 @@ public class CreateFeedFragment extends BaseFragment implements View.OnClickList
 
     public  static final String TAG = CreateFeedFragment.class.getSimpleName();
 
-    @BindView(R.id.radio_button_provider)
-    RadioButton mRadioButtonForProvider;
-    @BindView(R.id.radio_button_consumer)
-    RadioButton mRadioButtonForConsumer;
 
-    @BindView(R.id.feed_available)
-    EditText mAvailableView;
+
+    @BindView(R.id.feed_content)
+    EditText mContentView;
     @BindView(R.id.feed_start_place)
     EditText mStartPlaceView;
     @BindView(R.id.feed_start_time)
     TextView mStartTimeView;
-    @BindView(R.id.feed_end_place)
-    EditText mEndPlaceView;
-    @BindView(R.id.feed_end_time)
-    TextView mEndTimeView;
+
 
     @BindView(R.id.feed_button_submit)
     Button mFeedSubmitButton;
@@ -71,7 +65,6 @@ public class CreateFeedFragment extends BaseFragment implements View.OnClickList
         ButterKnife.bind(this, view);
 
         mStartTimeView.setOnClickListener(this);
-        mEndTimeView.setOnClickListener(this);
         return view;
     }
 
@@ -83,8 +76,7 @@ public class CreateFeedFragment extends BaseFragment implements View.OnClickList
     @Override
     protected Subscription doRequest() {
         Feed feed = new Feed();
-        feed.setAvailable(mAvailableView.getText().toString());
-        feed.setFeed_type(1);
+        feed.setFeed_content(mContentView.getText().toString());
         return RestModule.getApis().createFeed(feed).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ResultResponse>() {
             @Override
             public void call(ResultResponse resultResponse) {
@@ -101,14 +93,7 @@ public class CreateFeedFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.radio_button_provider:
-                mAvailableView.setHint("Available");
-                break;
-            case R.id.radio_button_consumer:
-                mAvailableView.setHint("Needed");
-                break;
             case R.id.feed_start_time:
-            case R.id.feed_end_time:
                 final TextView tv = (TextView) v;
                 configureDatePicker(Calendar.getInstance(), new DatePickerDialog.OnDateSetListener() {
                     @Override
