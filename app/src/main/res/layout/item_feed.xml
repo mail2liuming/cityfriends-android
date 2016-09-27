@@ -22,12 +22,13 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="@dimen/margin_half"/>
 
-        <ImageView
+        <Button
             android:id="@+id/item_feed_add_to_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_add"
             android:layout_alignParentRight="true"
+            android:clickable="true"
             />
 
         <TextView

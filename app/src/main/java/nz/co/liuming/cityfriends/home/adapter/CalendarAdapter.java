@@ -30,18 +30,18 @@ public class CalendarAdapter extends BaseFeedAdapter<CalendarFeed, CalendarAdapt
     protected void onBindHolder(CalendarAdapter.ViewHolder holder, int position) {
         if (position >= 0 && position < mFeedEntries.size()) {
             CalendarFeed entry = mFeedEntries.get(position);
-//            holder.mTypeView.setText(entry.getFeed_type() + "");
-//            LogUtil.d(this.getClass().getSimpleName() + " : onBindHolder " + entry.getFeed_type());
-//            if (!TextUtils.isEmpty(entry.getUser_name())) {
-//                holder.mUserNameView.setText(entry.getUser_name());
-//            }
+            holder.mExactTimeView.setText((entry.getExact_time()));
+            holder.mContentView.setText(entry.getFeed_content());
+            if (!TextUtils.isEmpty(entry.getUser_name())) {
+                holder.mUserNameView.setText(entry.getUser_name());
+            }
         }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View view;
-        @BindView(R.id.item_feed_type)
-        TextView mTypeView;
+        @BindView(R.id.item_feed_content)
+        TextView mContentView;
         @BindView(R.id.item_feed_user_name)
         TextView mUserNameView;
         @BindView(R.id.item_feed_exact_time)

@@ -14,6 +14,7 @@ import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.adapter.BaseFeedAdapter;
 import nz.co.liuming.cityfriends.home.adapter.FeedAdapter;
+import nz.co.liuming.cityfriends.home.model.Feed;
 import nz.co.liuming.cityfriends.home.model.FeedEntry;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -22,7 +23,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by liuming on 17/06/16.
  */
-public class FeedFragment extends BaseFeedFragment<FeedEntry> {
+public class FeedFragment extends BaseFeedFragment<Feed> {
 
     private FloatingActionButton fab;
 
@@ -71,7 +72,7 @@ public class FeedFragment extends BaseFeedFragment<FeedEntry> {
     }
 
     @Override
-    public BaseFeedAdapter<FeedEntry, ?> getAdapter() {
+    public BaseFeedAdapter<Feed, ?> getAdapter() {
         return new FeedAdapter();
     }
 

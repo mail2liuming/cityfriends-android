@@ -77,6 +77,8 @@ public class CreateFeedFragment extends BaseFragment implements View.OnClickList
     protected Subscription doRequest() {
         Feed feed = new Feed();
         feed.setFeed_content(mContentView.getText().toString());
+        feed.setStart_place(mStartPlaceView.getText().toString());
+        feed.setStart_time(mStartTimeView.getText().toString());
         return RestModule.getApis().createFeed(feed).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ResultResponse>() {
             @Override
             public void call(ResultResponse resultResponse) {

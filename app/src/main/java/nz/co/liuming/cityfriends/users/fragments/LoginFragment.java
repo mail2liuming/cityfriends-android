@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -66,6 +67,18 @@ public class LoginFragment extends BaseFragment {
                     //TODO
                 } else {
                     CityFreindsApplication.get().getUserDelegate().login(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                }
+            }
+        });
+
+        mSwitchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    mConfirmView.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mConfirmView.setVisibility(View.GONE);
                 }
             }
         });

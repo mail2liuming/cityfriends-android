@@ -17,6 +17,7 @@ public class CalendarFeed implements BaseModel {
      */
 
     private int id;
+    private int feed_id;
     private int calendar_type;
     private String exact_time;
     private String feed_content;
@@ -70,4 +71,7 @@ public class CalendarFeed implements BaseModel {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
+
+    public int getFeed_id(){return feed_id;}
+    public void setFeed_id(int aFeed_id){this.feed_id = aFeed_id;}
 }

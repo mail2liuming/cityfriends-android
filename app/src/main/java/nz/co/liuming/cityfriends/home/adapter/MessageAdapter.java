@@ -38,7 +38,7 @@ public class MessageAdapter extends BaseFeedAdapter<MessageFeed, MessageAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View view;
-        @BindView(R.id.item_feed_type)
+        @BindView(R.id.item_feed_content)
         TextView mTypeView;
         @BindView(R.id.item_feed_user_name)
         TextView mUserNameView;

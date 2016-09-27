@@ -25,7 +25,7 @@ import rx.Observable;
  */
 public interface RestApis {
     @GET("feeds/entries")
-    Observable<List<FeedEntry>> getEntries(
+    Observable<List<Feed>> getEntries(
             @Query("page") int aPage);
 
     @GET("calendars")
