@@ -24,6 +24,7 @@ import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.users.events.LoginEvent;
+import retrofit2.http.Body;
 import rx.Subscription;
 
 /**
@@ -41,6 +42,8 @@ public class LoginFragment extends BaseFragment {
     SwitchCompat mSwitchView;
     @BindView(R.id.login_forget_password)
     TextView mForgetPasswordView;
+    @BindView(R.id.login_user_name)
+    EditText mNameView;
     @BindView(R.id.login_submit)
     Button mSubmitView;
 
@@ -64,7 +67,7 @@ public class LoginFragment extends BaseFragment {
             public void onClick(View v) {
                 LogUtil.d(" Login onSubmit");
                 if (mSwitchView.isChecked()) {
-                    //TODO
+                    CityFreindsApplication.get().getUserDelegate().signup(mNameView.getText().toString(),mEmailView.getText().toString(),mPasswordView.getText().toString(),mConfirmView.getText().toString());
                 } else {
                     CityFreindsApplication.get().getUserDelegate().login(mEmailView.getText().toString(), mPasswordView.getText().toString());
                 }
@@ -76,9 +79,11 @@ public class LoginFragment extends BaseFragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     mConfirmView.setVisibility(View.VISIBLE);
+                    mNameView.setVisibility(View.VISIBLE);
                 }
                 else{
                     mConfirmView.setVisibility(View.GONE);
+                    mNameView.setVisibility(View.GONE);
                 }
             }
         });

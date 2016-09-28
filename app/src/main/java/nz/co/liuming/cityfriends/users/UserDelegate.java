@@ -13,6 +13,7 @@ import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.common.utils.PreferencesUtil;
 import nz.co.liuming.cityfriends.users.events.LoginEvent;
 import nz.co.liuming.cityfriends.users.model.User;
+import nz.co.liuming.cityfriends.users.model.UserRequest;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -36,11 +37,7 @@ public class UserDelegate implements Loadable {
         RestModule.getApis().doLogin(jsonObject).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<User>() {
             @Override
             public void call(User user) {
-                mId = user.getId();
-                mToken = user.getToken();
-
-                store();
-                LogUtil.d("id: " + mId + "  token: " + mToken);
+                storeUser(user);
 
                 EventBus.getDefault().post(new LoginEvent());
             }
@@ -57,7 +54,34 @@ public class UserDelegate implements Loadable {
         PreferencesUtil.saveString(CityFreindsApplication.get(), PreferencesUtil.KEY_USER_TOKEN, "");
     }
 
-    public void signup() {
+    public void signup(String aName, String aEmail, String aPwd,String aConfirmPwd) {
+        UserRequest userRequest = new UserRequest();
+        userRequest.setName(aName);
+        userRequest.setEmail(aEmail);
+        userRequest.setPassword(aPwd);
+        userRequest.setPassword_confirmation(aConfirmPwd);
+
+        RestModule.getApis().doSignup(userRequest).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<User>() {
+            @Override
+            public void call(User user) {
+                storeUser(user);
+                EventBus.getDefault().post(new LoginEvent());
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                EventBus.getDefault().post(new LoginEvent(throwable.getMessage()));
+            }
+        });
+
+    }
+
+    private void storeUser(User user){
+        mId = user.getId();
+        mToken = user.getToken();
+
+        store();
+        LogUtil.d("id: " + mId + "  token: " + mToken);
     }
 
     @Override

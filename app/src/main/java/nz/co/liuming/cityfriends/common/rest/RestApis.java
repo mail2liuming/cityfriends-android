@@ -13,6 +13,7 @@ import nz.co.liuming.cityfriends.home.model.Feed;
 import nz.co.liuming.cityfriends.home.model.FeedEntry;
 import nz.co.liuming.cityfriends.home.model.MessageFeed;
 import nz.co.liuming.cityfriends.users.model.User;
+import nz.co.liuming.cityfriends.users.model.UserRequest;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -38,6 +39,9 @@ public interface RestApis {
 
     @POST("login")
     Observable<User> doLogin(@Body JsonObject body);
+
+    @POST("signup")
+    Observable<User> doSignup(@Body UserRequest userRequest);
 
     @POST("feeds")
     Observable<ResultResponse> createFeed(@Body Feed body);

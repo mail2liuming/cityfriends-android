@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
 
-
+/**
+ * Created by liuming on 17/06/16.
+ */
 /**
  * Helper class used to show {@link Fragment}s on the screen.
  *

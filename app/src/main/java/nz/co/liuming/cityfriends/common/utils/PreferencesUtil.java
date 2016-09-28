@@ -3,7 +3,9 @@ package nz.co.liuming.cityfriends.common.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
+/**
+ * Created by liuming on 17/06/16.
+ */
 
 public class PreferencesUtil {
 
