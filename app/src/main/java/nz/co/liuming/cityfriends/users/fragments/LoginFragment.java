@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +17,11 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.users.events.LoginEvent;
-import retrofit2.http.Body;
-import rx.Subscription;
 
 /**
  * Created by liuming on 22/06/16.
@@ -58,7 +54,7 @@ public class LoginFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_login_main, container, false);
         ButterKnife.setDebug(true);
         ButterKnife.bind(this, view);
 

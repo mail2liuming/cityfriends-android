@@ -76,6 +76,10 @@ public class UserDelegate implements Loadable {
 
     }
 
+    public boolean isFriend(User otherUser){
+        return false;
+    }
+
     private void storeUser(User user){
         mId = user.getId();
         mToken = user.getToken();
