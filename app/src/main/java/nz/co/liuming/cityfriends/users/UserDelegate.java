@@ -16,6 +16,7 @@ import nz.co.liuming.cityfriends.users.events.LoginEvent;
 import nz.co.liuming.cityfriends.users.model.Friend;
 import nz.co.liuming.cityfriends.users.model.User;
 import nz.co.liuming.cityfriends.users.model.UserRequest;
+import nz.co.liuming.cityfriends.users.model.Userable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -83,7 +84,7 @@ public class UserDelegate implements Loadable {
 
     }
 
-    public boolean isFriend(User otherUser) {
+    public boolean isFriend(Userable otherUser) {
         if (mFriendDelegate != null) {
             return mFriendDelegate.isFriend(otherUser.getId());
         }
@@ -119,6 +120,11 @@ public class UserDelegate implements Loadable {
     public void load() {
         mId = PreferencesUtil.getInt(CityFreindsApplication.get(), PreferencesUtil.KEY_USER_ID, 0);
         mToken = PreferencesUtil.getString(CityFreindsApplication.get(), PreferencesUtil.KEY_USER_TOKEN, "");
+        LogUtil.d("load user --- id: " + mId + "  token: " + mToken);
+        List<Friend> list = getFriends();
+        if (list.size() <= 0) {
+            loadFriends();
+        }
     }
 
     public void store() {

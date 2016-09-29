@@ -30,6 +30,7 @@ import nz.co.liuming.cityfriends.home.fragments.CreateFeedFragment;
 import nz.co.liuming.cityfriends.home.fragments.FeedFragment;
 import nz.co.liuming.cityfriends.home.fragments.MessageFragment;
 import nz.co.liuming.cityfriends.users.LoginActivity;
+import nz.co.liuming.cityfriends.users.fragments.FriendsFragment;
 
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -78,7 +79,7 @@ public class HomeActivity extends BaseActivity
             }
         });
 //
-//        navigationView.getMenu().findItem(R.id.nav_camera).setEnabled(false);
+        navigationView.getMenu().findItem(R.id.nav_logout).setEnabled(false);
 //        navigationView.getMenu().findItem(R.id.nav_gallery).setVisible(false);
     }
 
@@ -102,10 +103,11 @@ public class HomeActivity extends BaseActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_freind) {
+            FragmentManagerUtils.addFragmentAndAddToBackStack(this, FriendsFragment.newInstance(),FriendsFragment.TAG,FragmentManagerUtils.Animation.SLIDE_IN_BOTTOM);
 
         } else if (id == R.id.nav_message) {
 
-        } else if (id == R.id.nav_setting) {
+        } else if (id == R.id.nav_logout) {
 
         } else if (id == R.id.nav_share) {
 

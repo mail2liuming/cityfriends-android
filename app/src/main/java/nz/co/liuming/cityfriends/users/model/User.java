@@ -8,7 +8,7 @@ import nz.co.liuming.cityfriends.common.rest.model.BaseModel;
 /**
  * Created by liuming on 17/06/16.
  */
-public class User implements BaseModel, Parcelable {
+public class User implements BaseModel, Parcelable,Userable {
 
     /**
      * id : 1
@@ -88,4 +88,5 @@ public class User implements BaseModel, Parcelable {
             return new User[size];
         }
     };
+
 }

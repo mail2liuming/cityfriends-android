@@ -44,7 +44,7 @@ public class FriendsFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_friends_list, container, false);
         ButterKnife.bind(this, v);
 
-        mFriendListView.setAdapter(new FriendListAdapter());
+        mFriendListView.setAdapter(new FriendListAdapter(getActivity()));
         return v;
     }
 

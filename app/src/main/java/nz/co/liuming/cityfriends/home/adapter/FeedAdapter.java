@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -20,7 +19,6 @@ import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.fragments.CreateCalendarFragment;
 import nz.co.liuming.cityfriends.home.model.Feed;
-import nz.co.liuming.cityfriends.home.model.FeedEntry;
 
 /**
  * Created by liuming on 13/07/16.

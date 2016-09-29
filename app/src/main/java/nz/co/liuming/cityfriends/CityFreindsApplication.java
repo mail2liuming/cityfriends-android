@@ -28,6 +28,7 @@ public class CityFreindsApplication extends Application {
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                 .build());
         mUserDelegate = new UserDelegate(new FriendsDelegate());
+        mUserDelegate.load();
     }
 
     public UserDelegate getUserDelegate() {

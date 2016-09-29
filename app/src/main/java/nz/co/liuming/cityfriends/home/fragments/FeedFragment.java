@@ -15,7 +15,6 @@ import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.adapter.BaseFeedAdapter;
 import nz.co.liuming.cityfriends.home.adapter.FeedAdapter;
 import nz.co.liuming.cityfriends.home.model.Feed;
-import nz.co.liuming.cityfriends.home.model.FeedEntry;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

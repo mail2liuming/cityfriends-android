@@ -19,6 +19,7 @@ import nz.co.liuming.cityfriends.common.rest.RestModule;
 import nz.co.liuming.cityfriends.common.rest.model.ResultResponse;
 import nz.co.liuming.cityfriends.home.model.MessageFeed;
 import nz.co.liuming.cityfriends.users.model.User;
+import nz.co.liuming.cityfriends.users.model.Userable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -42,9 +43,9 @@ public class UserProfileFragment extends BaseFragment {
     Button mSubmitBtn;
     @BindView(R.id.user_profile_message)
     EditText mMessageET;
-    private User mUser;
+    private Userable mUser;
 
-    public static UserProfileFragment newInstance(User user) {
+    public static UserProfileFragment newInstance(Userable user) {
         Bundle args = new Bundle();
         args.putParcelable("User", user);
         UserProfileFragment fragment = new UserProfileFragment();
@@ -55,7 +56,7 @@ public class UserProfileFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        User user = getArguments().getParcelable("User");
+        Userable user = getArguments().getParcelable("User");
         mUser = user;
         if (user == null) {
             getFragmentManager().popBackStack();
@@ -68,6 +69,8 @@ public class UserProfileFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_user_profile, container, false);
         ButterKnife.bind(this, v);
         prepateViews();
+        mEmailTV.setText(mUser.getEmail());
+        mNameTV.setText(mUser.getName());
         return v;
     }
 

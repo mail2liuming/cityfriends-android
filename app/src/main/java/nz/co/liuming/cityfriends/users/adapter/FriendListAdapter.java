@@ -1,5 +1,7 @@
 package nz.co.liuming.cityfriends.users.adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import nz.co.liuming.cityfriends.R;
+import nz.co.liuming.cityfriends.common.basecomponents.BaseActivity;
+import nz.co.liuming.cityfriends.common.utils.FragmentManagerUtils;
+import nz.co.liuming.cityfriends.users.fragments.UserProfileFragment;
 import nz.co.liuming.cityfriends.users.model.Friend;
 
 /**
@@ -20,6 +25,11 @@ import nz.co.liuming.cityfriends.users.model.Friend;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.FriendViewHolder> {
 
+    private Activity mActivity;
+
+    public FriendListAdapter(Activity activity){
+        mActivity = activity;
+    }
 
     @Override
     public FriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,11 +37,18 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Fr
     }
 
     @Override
-    public void onBindViewHolder(FriendViewHolder holder, int position) {
+    public void onBindViewHolder(final FriendViewHolder holder, int position) {
         List<Friend> friendList = CityFreindsApplication.get().getUserDelegate().getFriends();
         if (position >= 0 && position < friendList.size()) {
-            Friend friend = friendList.get(position);
+            final Friend friend = friendList.get(position);
             holder.mFriendNameTV.setText(friend.getName());
+            holder.mFriendNameTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BaseActivity activity = (BaseActivity) mActivity;
+                    FragmentManagerUtils.addFragmentAndAddToBackStack(activity, UserProfileFragment.newInstance(friend), UserProfileFragment.TAG, FragmentManagerUtils.Animation.SLIDE_IN_RIGHT);
+                }
+            });
         }
 
     }

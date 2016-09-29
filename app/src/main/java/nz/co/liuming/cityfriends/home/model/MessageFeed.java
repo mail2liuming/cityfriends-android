@@ -33,7 +33,7 @@ public class MessageFeed implements BaseModel {
      */
 
     private int id;
-    private Object status;
+    private int status;
     private int sender_id;
     private String receiver_name;
     private String sender_name;
@@ -70,11 +70,11 @@ public class MessageFeed implements BaseModel {
         this.id = id;
     }
 
-    public Object getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Object status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

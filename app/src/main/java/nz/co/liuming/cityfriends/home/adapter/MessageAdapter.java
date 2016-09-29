@@ -27,7 +27,7 @@ public class MessageAdapter extends BaseFeedAdapter<MessageFeed, MessageAdapter.
     @Override
     protected MessageAdapter.ViewHolder onCreateHolder(ViewGroup parent) {
         LogUtil.d(this.getClass().getSimpleName() + " : onCreateHolder ");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
         return new ViewHolder(view);
     }
 

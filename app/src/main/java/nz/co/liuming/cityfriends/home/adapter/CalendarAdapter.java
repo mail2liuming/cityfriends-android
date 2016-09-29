@@ -12,7 +12,6 @@ import butterknife.ButterKnife;
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.home.model.CalendarFeed;
-import nz.co.liuming.cityfriends.home.model.FeedEntry;
 
 /**
  * Created by liuming on 13/07/16.
