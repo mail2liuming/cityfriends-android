@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import nz.co.liuming.cityfriends.R;
 import nz.co.liuming.cityfriends.common.basecomponents.BaseFragment;
+import nz.co.liuming.cityfriends.common.rest.RestModule;
+import nz.co.liuming.cityfriends.common.rest.model.ResultResponse;
+import nz.co.liuming.cityfriends.home.model.MessageFeed;
 import nz.co.liuming.cityfriends.users.model.User;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by liuming on 28/09/16.
@@ -75,18 +82,34 @@ public class UserProfileFragment extends BaseFragment {
                     buildAndSendMessage(mMessageET.getText().toString(), TYPE_COMMON_TEXT);
                 }
             });
-        } else if (CityFreindsApplication.get().getUserDelegate().isLogin() && CityFreindsApplication.get().getUserDelegate().getId()!=mUser.getId()) {
+        } else if (CityFreindsApplication.get().getUserDelegate().isLogin() && CityFreindsApplication.get().getUserDelegate().getId() != mUser.getId()) {
             mSubmitBtn.setVisibility(View.VISIBLE);
             mSubmitBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    buildAndSendMessage("Add Friend",TYPE_REQUEST_FRIEND);
+                    buildAndSendMessage("Add Friend", TYPE_REQUEST_FRIEND);
                 }
             });
         }
     }
 
     private void buildAndSendMessage(String content, int type) {
+        MessageFeed messageFeed = new MessageFeed();
+        messageFeed.setReceiver_id(mUser.getId());
+        messageFeed.setMsg_content(content);
+        messageFeed.setMsg_type(type);
+
+        RestModule.getApis().createMessage(messageFeed).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ResultResponse>() {
+            @Override
+            public void call(ResultResponse resultResponse) {
+                getFragmentManager().popBackStack();
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

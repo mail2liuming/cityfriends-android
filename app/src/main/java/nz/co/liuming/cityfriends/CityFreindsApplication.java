@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 
+import nz.co.liuming.cityfriends.users.FriendsDelegate;
 import nz.co.liuming.cityfriends.users.UserDelegate;
 
 /**
@@ -26,7 +27,7 @@ public class CityFreindsApplication extends Application {
         Stetho.initialize(Stetho.newInitializerBuilder(this)
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                 .build());
-        mUserDelegate = new UserDelegate();
+        mUserDelegate = new UserDelegate(new FriendsDelegate());
     }
 
     public UserDelegate getUserDelegate() {

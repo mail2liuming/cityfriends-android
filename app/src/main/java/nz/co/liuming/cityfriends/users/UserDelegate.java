@@ -3,8 +3,9 @@ package nz.co.liuming.cityfriends.users;
 import com.google.gson.JsonObject;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import nz.co.liuming.cityfriends.CityFreindsApplication;
 import nz.co.liuming.cityfriends.common.interfaces.Loadable;
@@ -12,9 +13,9 @@ import nz.co.liuming.cityfriends.common.rest.RestModule;
 import nz.co.liuming.cityfriends.common.utils.LogUtil;
 import nz.co.liuming.cityfriends.common.utils.PreferencesUtil;
 import nz.co.liuming.cityfriends.users.events.LoginEvent;
+import nz.co.liuming.cityfriends.users.model.Friend;
 import nz.co.liuming.cityfriends.users.model.User;
 import nz.co.liuming.cityfriends.users.model.UserRequest;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -26,6 +27,12 @@ public class UserDelegate implements Loadable {
 
     private int mId = 0;
     private String mToken;
+
+    private FriendsDelegate mFriendDelegate;
+
+    public UserDelegate(FriendsDelegate friendsDelegate) {
+        mFriendDelegate = friendsDelegate;
+    }
 
     public void login(String aEmail, String aPassword) {
         JsonObject jsonObject = null;
@@ -54,7 +61,7 @@ public class UserDelegate implements Loadable {
         PreferencesUtil.saveString(CityFreindsApplication.get(), PreferencesUtil.KEY_USER_TOKEN, "");
     }
 
-    public void signup(String aName, String aEmail, String aPwd,String aConfirmPwd) {
+    public void signup(String aName, String aEmail, String aPwd, String aConfirmPwd) {
         UserRequest userRequest = new UserRequest();
         userRequest.setName(aName);
         userRequest.setEmail(aEmail);
@@ -76,13 +83,33 @@ public class UserDelegate implements Loadable {
 
     }
 
-    public boolean isFriend(User otherUser){
+    public boolean isFriend(User otherUser) {
+        if (mFriendDelegate != null) {
+            return mFriendDelegate.isFriend(otherUser.getId());
+        }
         return false;
     }
 
-    private void storeUser(User user){
+    public void loadFriends() {
+        if (mFriendDelegate != null) {
+            mFriendDelegate.loadFriends();
+        }
+    }
+
+    public List<Friend> getFriends() {
+        if (mFriendDelegate != null) {
+            return mFriendDelegate.getFriends();
+        }
+        return new ArrayList<>();
+    }
+
+    private void storeUser(User user) {
         mId = user.getId();
         mToken = user.getToken();
+
+        if (mFriendDelegate != null) {
+            mFriendDelegate.loadFriends();
+        }
 
         store();
         LogUtil.d("id: " + mId + "  token: " + mToken);
